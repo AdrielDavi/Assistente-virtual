@@ -1,0 +1,127 @@
+pill ou pillow   - pip install pillow
+pyaudio           -pip install pyaudio
+speechRecogniton   pip install SpeechRecognition
+pyscreenshot      -python3 -m pip install Pillow pyscreenshot
+pytesseract-pip install pytesseract ::download https://github.com/UB-Mannheim/tesseract/wiki
+opencv-python pip install opencv-python
+pip install --user gTTS
+pip install --user playsound
+
+- Colocar o pesquise para pesquisar o que eu quiser no google
+
+
+dá uma olhada depois
+*selenium
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Xaropeiro:
+requisitar manutenção de máquinas e equipamentos; controlar volume de líquidos;
+controlar tempo, temperatura e pressão de filtragem;
+CBO 841745
+risco físico: ruido
+risco quimico: poeira gases e etc.
+risco biológico: exposição a insetos
+risco ergonômico: repetitividade, responsabilidade e etc.
+risco acidental: maquinas
+
+Carregador
+Prepara cargas e descargas de mercadorias, movimenta mercadorias em transportes, 
+coleta e entrega encomendas;
+CBO 7832-10
+risco físico: ruido
+risco quimico: poeira 
+risco biológico: exposição a insetos e animais peçonhentos
+risco ergonômico: levantamento de peso, postura inadequada e etc.
+risco acidental: risco de queda
+
+Estoquista
+CBO 4141-25
+Uma pessoa estoquista é responsável por fazer a gestão do estoque, receber 
+mercadorias e saber onde está cada tipo de produto. Esse profissional deve organizar
+os produtos e separá-los por categorias para facilitar na hora de encontrá-los.
+
+
+
+
+Operador de máquina
+Operar equipamentos de arrasto, elevação e deslocamento de materiais,
+como pás carregadeiras, retroescavadeiras, empilhadeiras, tratores e outros 
+similares, controlando a velocidade de tração e freando, para movimentar diversas cargas
+CBO 715125
+risco físico: ruido e vibrações
+risco quimico: poeira, bactérias, 
+risco biológico: exposição a insetos 
+risco ergonômico: responsabilidade,postura e etc.
+risco acidental: Máquinas e equipamento sem proteção e etc.
+
+Técnico em informática
+montagem e manutenção de computadores, detecção e correção de problemas nos
+sistemas, instalação e configuração de redes, aplicativos, programas e 
+softwares, além de desenvolvimento de sistemas e websites.
+CBO 3172-10
+risco físico: frio e danos ocular
+risco quimico: poeira, bactérias, 
+risco biológico: exposição a insetos 
+risco ergonômico: postura, monotonia e repetitividade
+risco acidental: arranjo físico inadequado
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Técnico em química
+Assessorar nas atividades de ensino, pesquisa e extensão. Executar ensaios 
+físico-químicos: Coletar amostras; utilizar normas técnicas; preparar 
+reagentes; utilizar instrumentos de medi-ção e controle; preparar amostras; registrar resultados de análises.
+CBO 3111-05 
+risco físico: irritação na pele e olhos, queimaduras e etc
+risco quimico: tudo
+risco biológico: fungos. bactérias e insetos
+risco ergonômico: postura, monotonia e repetitividade
+risco acidental: incêndio e explosão
+
+
+
+
+
+
