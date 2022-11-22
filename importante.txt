@@ -6,10 +6,17 @@ pytesseract-pip install pytesseract ::download https://github.com/UB-Mannheim/te
 opencv-python pip install opencv-python
 pip install --user gTTS
 pip install --user playsound
+pip install PySimpleGUI
+pip install pygame
 
 - Colocar o pesquise para pesquisar o que eu quiser no google
 
 
 dá uma olhada depois
 *selenium
+
+
+
+
+
 
