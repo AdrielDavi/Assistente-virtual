@@ -89,6 +89,8 @@ pupilaf = pygame.image.load("pupilaf.png")
 biniciar = pygame.image.load("biniciar.png")
 biniciar2 = pygame.image.load("biniciar2.png") #mouse por cima
 biniciar3 = pygame.image.load("biniciar3.png") # Clica
+menuham = pygame.image.load("menuham.png") # abre o Menu
+menu_config1 = pygame.image.load("menu_config1.png") # Clica
 
 
 
@@ -113,14 +115,23 @@ while True:
         tela.fill(cinza)
         tela.blit(pupilaf,(75,0)) #pupila
         tela.blit(biniciar,(282,375))#botão
+        tela.blit(menuham,(0,0))#menu hamburguer
+        
 
         #configurações do mouse
         mx, my = pygame.mouse.get_pos() #Pega a a posição do mouse
         if mx >= 287 and mx <= 365 and my >= 334 and my <= 456 :
             tela.blit(biniciar3,(282,375))#botão
+        if event.type == MOUSEBUTTONDOWN:
+            if mx >= 12 and mx <= 87 and my >= 12 and my <= 87 :
+                mx, my = pygame.mouse.get_pos() #Pega a a posição do mouse
+                tela.blit(menu_config1,(440,160)) #menu_config1
+            
+        
         
         #pupila
         if event.type == MOUSEBUTTONDOWN:
+            
             mx, my = pygame.mouse.get_pos() #Pega a a posição do mouse
             if mx >= 287 and mx <= 365 and my >= 334 and my <= 456 :
                 tela.blit(biniciar3,(282,375))#botão
