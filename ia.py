@@ -45,10 +45,17 @@ def ouvir_microfone(): #Retorna a frase que eu disser
         frase = ""   #renicia a frase
     return frase
 
+def fala_data (x): #retorn a data toda junta
+    retorna = ""
+    for i in x:
+        if i != "/":
+            retorna = retorna + i
+    return retorna  
 
 def pupila (): #código do pupila
     while True:     
-        todays_date = date.today()    #algo relacionado a data não lembro e tem que mexer
+        data_atual = date.today() #data atual (do computador pessoal)
+        data_em_texto = data_atual.strftime("%d/%m/%Y") #converte para 
         frase = ouvir_microfone() #frase recebe a função "ouvir" que retorna a frase dita
         frase = frase.lower() #converta as letras do que foito em minúsculas
         #ler a tela
@@ -80,15 +87,27 @@ def pupila (): #código do pupila
             audio("colocando músicas relaxantes")
             os.startfile("https://www.youtube.com/watch?v=pWjmpSD-ph0")
         #DATA (tudo relacionado a datas inclusive um contador de dias)
-        if frase == "pupila qual a data de hoje":  #colocar audio
-            audio("Data atual: ", todays_date)           #colocar audio
-        if frase == "pupila em que ano estamos":  #colocar audio
-            audio("Ano atual:", todays_date.year) #colocar audio
-        if frase == "pupila em que mês estamos":  #colocar audio
-            audio("Mês atual:", todays_date.month) #colocar audio
-        if frase == "pupila que dia é hoje":  #colocar audio
-            audio("Dia atual:", todays_date.day)#colocar audio
-                    #FIM
+        if frase == "pupila qual a data de hoje":  #DATA ATUAL
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render("A data atual é " + fala_data(data_em_texto[0:2]) + " do " + fala_data(data_em_texto[3:5]) + " de " + fala_data(data_em_texto[6:10]), True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("A data atual é " + fala_data(data_em_texto[0:2]) + "do" + fala_data(data_em_texto[3:5]) + "de" + fala_data(data_em_texto[6:10]))          
+        if frase == "pupila em que ano estamos": #ANO
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render("O ano atual é  " + fala_data(data_em_texto[6:10]), True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("O ano atual é " + fala_data(data_em_texto[6:10]))   
+        if frase == "pupila em que mês estamos":  #MÊS (COLOCAR O NOME DO MÊS)
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render("O mês atual é " + fala_data(data_em_texto[3:5]) , True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("O mês atual é " + fala_data(data_em_texto[3:5]) )   
+        if frase == "pupila que dia é hoje":  #DIA (COLOCAR SEGUNDA,terça)
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render("Hoje é dia " + fala_data(data_em_texto[0:2]) , True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("Hoje é dia " + fala_data(data_em_texto[0:2]))   
+        #FIM
         if frase == "Sair do pupila" or frase == "sair do pupila" :
             tela.blit(apaga,(250,350)) #legenda
             img = font.render('Adeus', True, (255,255,255),(0,0,0)) #legenda
@@ -97,7 +116,7 @@ def pupila (): #código do pupila
             global confirma_inicio #A variavél passa a interagir com o pygame
             confirma_inicio = 0 #Serve para rodar o pupila novamente
             break
-        
+      
 def iniciar_pupila(): #inia o pygame e o pupila em processamentos diferentes
     t = threading.Thread(target = pupila) #Deve torrar um processador se colocar mais de um desse
     t.start() #CUIDADO PERIGO cAVEIRA
@@ -154,6 +173,11 @@ while True:
         #configurações do mouse:
 
         mx, my = pygame.mouse.get_pos() #Pega a a posição do mouse
+        if confirma_inicio == 1:
+            tela.blit(biniciar2,(282,375))#botão
+        else:
+            tela.blit(biniciar,(282,375))#botão
+
         #if para mudar o botão de  iniciar o pupila
         if mx >= 287 and mx <= 365 and my >= 334 and my <= 456 : #quando o mouse fica por cima o botão muda
             tela.blit(biniciar3,(282,375))#botão
