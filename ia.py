@@ -1,5 +1,6 @@
-
+import random
 import pygame #parte gráfica
+from pygame import mixer
 from pygame.locals import *
 import sys #uso para sair do programa
 from sys import exit #uso para sair do programa
@@ -14,6 +15,10 @@ import threading #multiprocessamento
 
 
 #Funções:
+def pesquisar (x):
+    frase1 = x[0:21]
+    frase2 = x[22::]
+    return frase1,frase2
 def audio(texto): #fala o texto além de ser responsável pela velocidade da fala
     speaker = pyttsx3.init() #inicia a biblioteca
     voices = speaker.getProperty("voices") #sei lá
@@ -53,13 +58,24 @@ def fala_data (x): #retorn a data toda junta
     return retorna  
 
 def pupila (): #código do pupila
-    while True:     
+    global confirma_inicio #A variavél passa a interagir com o pygame
+    
+    
+    while True:
+        comando_invalido = 0
+        piadas=["O que o pato disse para a pata? Vem Quá!", "Porque o menino estava falando ao telefone deitado? Para não cair a ligação","Qual é a fórmula da água benta?H Deus O!","Qual é a cidade brasileira que não tem táxi? Uberlândia","O que o tijolo falou para o outro? Há um ciumento entre nós."]   
         data_atual = date.today() #data atual (do computador pessoal)
         data_em_texto = data_atual.strftime("%d/%m/%Y") #converte para 
         frase = ouvir_microfone() #frase recebe a função "ouvir" que retorna a frase dita
         frase = frase.lower() #converta as letras do que foito em minúsculas
+        frase1,frase2 = pesquisar(frase) #frase1: pupila pesquise sobre ; frase2: (oque vai ser pesquisado)
+        
+        
+
+        
         #ler a tela
         if frase == "pupila leia isso": #ler a tela
+            comando_invalido = 1
             imagem = pyscreenshot.grab() #tira o print
             imagem.save("tela.png") # Salva com o nome tela
             img = cv2.imread("tela.png") #ler a imagem
@@ -68,19 +84,30 @@ def pupila (): #código do pupila
             #print (resultado)
             audio(resultado)
         #NAVEGAR (tudo que envolver navegador) [lembrar de colocar uma opção abrir navegador]
+        if frase1 == "pupila pesquise sobre": #Pesquisa o que você quiser
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('Pesquisando sobre'+frase2, True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio('Pesquisando sobre'+frase2)
+            os.startfile("https://www.google.com/search?q="+frase2)
+
         if frase == "pupila abrir google":
+            comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
             img = font.render('Abrindo o Google', True, (255,255,255),(0,0,0)) #legenda
             tela.blit(img, (250,350)) #legenda
             audio("Abrindo o Google")
             os.system("start chrome") 
         if frase == "pupila abrir youtube":
+            comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
             img = font.render('Abrindo o Youtube', True, (255,255,255),(0,0,0)) #legenda
             tela.blit(img, (250,350)) #legenda
             audio("Abrindo o YouTube")
             os.startfile("https://www.youtube.com/")
         if frase == "pupila abrir música relaxante" or frase == "pupila coloque música relaxante" or frase == "pupila coloque uma música relaxante":
+            comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
             img = font.render('Colocando músicas relaxantes', True, (255,255,255),(0,0,0)) #legenda
             tela.blit(img, (250,350)) #legenda
@@ -88,34 +115,47 @@ def pupila (): #código do pupila
             os.startfile("https://www.youtube.com/watch?v=pWjmpSD-ph0")
         #DATA (tudo relacionado a datas inclusive um contador de dias)
         if frase == "pupila qual a data de hoje":  #DATA ATUAL
+            comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
             img = font.render("A data atual é " + fala_data(data_em_texto[0:2]) + " do " + fala_data(data_em_texto[3:5]) + " de " + fala_data(data_em_texto[6:10]), True, (255,255,255),(0,0,0)) #legenda
             tela.blit(img, (250,350)) #legenda
             audio("A data atual é " + fala_data(data_em_texto[0:2]) + "do" + fala_data(data_em_texto[3:5]) + "de" + fala_data(data_em_texto[6:10]))          
         if frase == "pupila em que ano estamos": #ANO
+            comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
             img = font.render("O ano atual é  " + fala_data(data_em_texto[6:10]), True, (255,255,255),(0,0,0)) #legenda
             tela.blit(img, (250,350)) #legenda
             audio("O ano atual é " + fala_data(data_em_texto[6:10]))   
         if frase == "pupila em que mês estamos":  #MÊS (COLOCAR O NOME DO MÊS)
+            comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
             img = font.render("O mês atual é " + fala_data(data_em_texto[3:5]) , True, (255,255,255),(0,0,0)) #legenda
             tela.blit(img, (250,350)) #legenda
             audio("O mês atual é " + fala_data(data_em_texto[3:5]) )   
         if frase == "pupila que dia é hoje":  #DIA (COLOCAR SEGUNDA,terça)
+            comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
             img = font.render("Hoje é dia " + fala_data(data_em_texto[0:2]) , True, (255,255,255),(0,0,0)) #legenda
             tela.blit(img, (250,350)) #legenda
             audio("Hoje é dia " + fala_data(data_em_texto[0:2]))   
+        #Tumor
+        if frase == "pupila me conte uma piada":
+            comando_invalido = 1
+            audio("Bom, você pediu, "+random.choice(piadas))
         #FIM
         if frase == "Sair do pupila" or frase == "sair do pupila" :
+            comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
             img = font.render('Adeus', True, (255,255,255),(0,0,0)) #legenda
             tela.blit(img, (250,350)) #legenda
             audio("Adeus")
-            global confirma_inicio #A variavél passa a interagir com o pygame
             confirma_inicio = 0 #Serve para rodar o pupila novamente
             break
+        if comando_invalido == 0:
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('Por favor, diga um comando válido', True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("Por favor, diga um comando válido")
       
 def iniciar_pupila(): #inia o pygame e o pupila em processamentos diferentes
     t = threading.Thread(target = pupila) #Deve torrar um processador se colocar mais de um desse
@@ -138,6 +178,8 @@ vel_05 = pygame.image.load("vel_05.png") #velocidade x0.5
 vel_normal = pygame.image.load("menu_normal.png") #velocidade padrão
 vel_15 = pygame.image.load("vel_15.png") #velocidade x1.5
 apaga = pygame.image.load("apaga.png") #atualiza a legenda (gambiarra)
+#SOM
+
 #tamanho da janela do Pupila
 largura = 640
 altura = 480
@@ -155,7 +197,9 @@ clock = pygame.time.Clock() #fps
 font = pygame.font.SysFont(None, 24) #Fonte da legenda
 while True:
     clock.tick(60) #60 fps
-    for event in pygame.event.get():           
+    
+    for event in pygame.event.get():  
+                
         #Sair
         if event.type == QUIT: #quando apertar no x sair do programa (gambiarra)
             restart_program()#gambiarra
@@ -165,7 +209,7 @@ while True:
         #imagens da tela
         tela.fill(cinza) #co de fundo do pupila
         tela.blit(pupilaf,(75,0)) #logo do pupila (provalvelmente está desalinhado)
-        tela.blit(biniciar,(282,375))#botão  (provalvelmente está desalinhado)
+        tela.blit(biniciar,(295,375))#botão  (provalvelmente está desalinhado)
         tela.blit(menuham,(0,0))#menu hamburguer
         if confirma1 != 0: # enquanto a confirmação for diferente de 0 o menu continuara aparecendo
             tela.blit(menu_config1,(440,160)) #menu de configuração
@@ -173,17 +217,19 @@ while True:
         #configurações do mouse:
 
         mx, my = pygame.mouse.get_pos() #Pega a a posição do mouse
+       
         if confirma_inicio == 1:
-            tela.blit(biniciar2,(282,375))#botão
+            tela.blit(biniciar2,(295,375))#botão
         else:
-            tela.blit(biniciar,(282,375))#botão
+            tela.blit(biniciar,(295,375))#botão
 
         #if para mudar o botão de  iniciar o pupila
-        if mx >= 287 and mx <= 365 and my >= 334 and my <= 456 : #quando o mouse fica por cima o botão muda
-            tela.blit(biniciar3,(282,375))#botão
+        if mx >= 295 and mx <= 365 and my >= 374 and my <= 447 : #quando o mouse fica por cima o botão muda
+            tela.blit(biniciar3,(295,375))#botão
         #if para abrir o menu config
         if event.type == MOUSEBUTTONDOWN:
-            if mx >= 12 and mx <= 87 and my >= 12 and my <= 87 :
+            
+            if mx >= 0 and mx <= 60 and my >= 0 and my <= 40 :
                 mx, my = pygame.mouse.get_pos() #Pega a a posição do mouse
                 tela.blit(menu_config1,(440,160)) #menu_config1
                 confirma1 = confirma1 +1 #serve para manter o menu aparecendo
@@ -211,10 +257,16 @@ while True:
         #pupila
         if confirma_inicio == 0: #Serve para não ter mais de um pupila rodando
             if event.type == MOUSEBUTTONDOWN: 
-                if mx >= 287 and mx <= 365 and my >= 334 and my <= 456 :   
+                if mx >= 287 and mx <= 365 and my >= 374 and my <= 447 :   
                     confirma_inicio = 1 #isso quer dizer que um pupila está rodando                
-                    tela.blit(biniciar3,(282,375))#botão              
+                    tela.blit(biniciar3,(295,375))#botão  
+                    som_inicia = mixer.Sound("som_inicio.wav")
+                    som_inicia.set_volume(0.5)  
+                    som_inicia.play()  
+                          
                     iniciar_pupila() #perigo morte demônio coisa ruim crâmunhão
+
+                     
                 
                 
             
