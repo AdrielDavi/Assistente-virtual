@@ -8,6 +8,7 @@ pip install --user gTTS
 pip install --user playsound
 pip install pyttsx3
 pip install pygame
+pip install pyautogui
 
 - Colocar o pesquise para pesquisar o que eu quiser no google
 

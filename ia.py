@@ -12,13 +12,12 @@ import pyscreenshot #tirar  print
 import os # executa comandos do terminal
 import pyttsx3 #tem função de ler txt e pdf
 import threading #multiprocessamento
+import pyautogui #auto
 
 
 #Funções:
-def pesquisar (x):
-    frase1 = x[0:21]
-    frase2 = x[22::]
-    return frase1,frase2
+
+
 def audio(texto): #fala o texto além de ser responsável pela velocidade da fala
     speaker = pyttsx3.init() #inicia a biblioteca
     voices = speaker.getProperty("voices") #sei lá
@@ -68,10 +67,9 @@ def pupila (): #código do pupila
         data_em_texto = data_atual.strftime("%d/%m/%Y") #converte para 
         frase = ouvir_microfone() #frase recebe a função "ouvir" que retorna a frase dita
         frase = frase.lower() #converta as letras do que foito em minúsculas
-        frase1,frase2 = pesquisar(frase) #frase1: pupila pesquise sobre ; frase2: (oque vai ser pesquisado)
+        mover = ""
         
         
-
         
         #ler a tela
         if frase == "pupila leia isso": #ler a tela
@@ -83,22 +81,152 @@ def pupila (): #código do pupila
             resultado = pytesseract.image_to_string(img) #Converte a imagem para string
             #print (resultado)
             audio(resultado)
-        #NAVEGAR (tudo que envolver navegador) [lembrar de colocar uma opção abrir navegador]
-        if frase1 == "pupila pesquise sobre": #Pesquisa o que você quiser
+        #NAVEGAR (relacionado ao pc em si)
+        if frase == "pupila abrir gerenciador de tarefas" or frase == "pupila abrir o gerenciador de tarefas":
             comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
-            img = font.render('Pesquisando sobre'+frase2, True, (255,255,255),(0,0,0)) #legenda
+            img = font.render('Abrindo o Google', True, (255,255,255),(0,0,0)) #legenda
             tela.blit(img, (250,350)) #legenda
-            audio('Pesquisando sobre'+frase2)
-            os.startfile("https://www.google.com/search?q="+frase2)
+            audio("Abrindo o gerenciador de tarefas")
+            os.system("start taskmgr.exe") 
+        if frase == "pupila fechar gerenciador de tarefas" or frase == "pupila fechar o gerenciador de tarefas": #fecha o google
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('fechando o gerenciador de tarefas', True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("fechando o gerenciador de tarefas")
+            os.system("taskkill /f /im taskmgr.exe")
 
-        if frase == "pupila abrir google":
+        if frase == "pupila abrir pasta" or frase == "pupila abrir a pasta":
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('Abrindo pasta', True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("Abrindo pasta")
+            os.system("start explorer.exe") 
+        if frase == "pupila fechar pasta" or frase == "pupila fechar a pasta": #fecha o google
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('fechando pasta', True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("fechando o gerenciador de tarefas")
+            os.system("taskkill /f /im explorer.exe")
+
+        if frase == "pupila abrir bloco de notas" or frase == "pupila abrir o bloco de notas":
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('Abrindo bloco de notas', True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("Abrindo bloco de notas")
+            os.system("start notepad.exe") 
+        if frase == "pupila fechar bloco de notas" or frase == "pupila fechar o bloco de notas": #fecha o google
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('fechando bloco de notas', True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("fechando bloco de notas")
+            os.system("taskkill /f /im notepad.exe") 
+
+        if frase[0:14] == "pupila escreva": #escreve qualquer coisa
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('Escrevendo...', True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("Escrevendo")
+            pyautogui.write(frase[15::])
+
+        if frase == "pupila enter" or frase == "pupila confirmar":
+            pyautogui.press("enter")
+
+        #MOUSE
+        if frase[0:15] == "pupila esquerda":
+            comando_invalido = 1
+            mover = ""
+            for i in frase:
+                if i == "1" or i == "2" or i == "3" or i == "4" or i == "5" or i == "6" or i == "7" or i == "8" or i == "9" or i == "0":
+                    mover = mover + i
+            mover = int(mover) 
+            currentMouseX, currentMouseY = pyautogui.position()
+            pyautogui.moveTo(currentMouseX - mover, currentMouseY)
+
+        if frase[0:14] == "pupila direita":
+            comando_invalido = 1
+            mover = ""
+            for i in frase:
+                if i == "1" or i == "2" or i == "3" or i == "4" or i == "5" or i == "6" or i == "7" or i == "8" or i == "9" or i == "0":
+                    mover = mover + i
+            mover = int(mover) 
+            currentMouseX, currentMouseY = pyautogui.position()
+            pyautogui.moveTo(currentMouseX + mover, currentMouseY)
+
+        if frase[0:11] == "pupila cima":
+            comando_invalido = 1
+            mover = ""
+            for i in frase:
+                if i == "1" or i == "2" or i == "3" or i == "4" or i == "5" or i == "6" or i == "7" or i == "8" or i == "9" or i == "0":
+                    mover = mover + i
+            mover = int(mover) 
+            currentMouseX, currentMouseY = pyautogui.position()
+            pyautogui.moveTo(currentMouseX , currentMouseY - mover)
+
+        if frase[0:12] == "pupila baixo":
+            comando_invalido = 1
+            mover = ""
+            for i in frase:
+                if i == "1" or i == "2" or i == "3" or i == "4" or i == "5" or i == "6" or i == "7" or i == "8" or i == "9" or i == "0":
+                    mover = mover + i
+            mover = int(mover) 
+            currentMouseX, currentMouseY = pyautogui.position()
+            pyautogui.moveTo(currentMouseX + mover, currentMouseY + mover)
+
+        if frase == "pupila clique": #clica
+            comando_invalido = 1
+            pyautogui.click() 
+
+        
+
+        
+        
+
+        
+
+
+
+        #NAVEGAR (tudo que envolver navegador) [lembrar de colocar uma opção abrir navegador padrão]
+        if frase[0:21] == "pupila pesquise sobre": #Pesquisa o que você quiser
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('Pesquisando sobre'+frase[22::], True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio('Pesquisando sobre'+frase[22::])
+            os.startfile("https://www.google.com/search?q="+frase[22::])
+        
+        if frase[0:26] == "pupila quantos dias faltam": #Pesquisa o que você quiser
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('Pesquisando sobre', True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio('Pesquisando sobre')
+            os.startfile("https://www.google.com/search?q="+frase[27::])
+
+        
+
+        
+        if frase == "pupila abrir google" or frase == "pupila abrir o google":
             comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
             img = font.render('Abrindo o Google', True, (255,255,255),(0,0,0)) #legenda
             tela.blit(img, (250,350)) #legenda
             audio("Abrindo o Google")
             os.system("start chrome") 
+        if frase == "pupila fechar google" or frase == "pupila fechar o google": #fecha o google
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('fechando o Google', True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("fechando o Google")
+            os.system("taskkill /f /im chrome.exe") 
+
         if frase == "pupila abrir youtube":
             comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
@@ -106,6 +234,14 @@ def pupila (): #código do pupila
             tela.blit(img, (250,350)) #legenda
             audio("Abrindo o YouTube")
             os.startfile("https://www.youtube.com/")
+        if frase == "pupila fechar youtube" or frase == "pupila fechar o youtube": #fecha o google
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('fechando o Youtube', True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio("fechando o Youtube")
+            os.system("taskkill /f /im chrome.exe") 
+
         if frase == "pupila abrir música relaxante" or frase == "pupila coloque música relaxante" or frase == "pupila coloque uma música relaxante":
             comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
@@ -113,7 +249,7 @@ def pupila (): #código do pupila
             tela.blit(img, (250,350)) #legenda
             audio("colocando músicas relaxantes")
             os.startfile("https://www.youtube.com/watch?v=pWjmpSD-ph0")
-        #DATA (tudo relacionado a datas inclusive um contador de dias)
+        #DATA (tudo relacionado a datas )
         if frase == "pupila qual a data de hoje":  #DATA ATUAL
             comando_invalido = 1
             tela.blit(apaga,(250,350)) #legenda
@@ -141,7 +277,7 @@ def pupila (): #código do pupila
         #Tumor
         if frase == "pupila me conte uma piada":
             comando_invalido = 1
-            audio("Bom, você pediu, "+random.choice(piadas))
+            audio("Bom, você pediu, "+random.choice(piadas)) 
         #FIM
         if frase == "Sair do pupila" or frase == "sair do pupila" :
             comando_invalido = 1
