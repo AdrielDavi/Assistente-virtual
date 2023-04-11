@@ -77,8 +77,8 @@ def pupila (): #código do pupila
             imagem = pyscreenshot.grab() #tira o print
             imagem.save("tela.png") # Salva com o nome tela
             img = cv2.imread("tela.png") #ler a imagem
-            pytesseract.pytesseract.tesseract_cmd = ("C:\Program Files\Tesseract-OCR\Tesseract.exe") #caminho
-            resultado = pytesseract.image_to_string(img) #Converte a imagem para string
+            pytesseract.pytesseract.tesseract_cmd = ("C:/Users/2020314415.IFAL-MACEIO/Desktop/tesseract/Tesseract.exe") #caminho
+            resultado = pytesseract.image_to_string(img, lang= "por") #Converte a imagem para string
             print (resultado)
             audio(resultado)
         #NAVEGAR (relacionado ao pc em si)
@@ -208,6 +208,15 @@ def pupila (): #código do pupila
             tela.blit(img, (250,350)) #legenda
             audio('Pesquisando sobre')
             os.startfile("https://www.google.com/search?q="+frase[27::])
+        
+        if frase[0:19] == "pupila abrir o site":
+            comando_invalido = 1
+            tela.blit(apaga,(250,350)) #legenda
+            img = font.render('Entrando no site', True, (255,255,255),(0,0,0)) #legenda
+            tela.blit(img, (250,350)) #legenda
+            audio('Entrando no site')
+            os.startfile("https://www."+frase[20::]+".com")
+
 
         
 
@@ -290,6 +299,7 @@ def pupila (): #código do pupila
         if comando_invalido == 0:
             tela.blit(apaga,(250,350)) #legenda
             img = font.render('Por favor, diga um comando válido', True, (255,255,255),(0,0,0)) #legenda
+            print (frase[0:19])
             tela.blit(img, (250,350)) #legenda
             audio("Por favor, diga um comando válido")
       
