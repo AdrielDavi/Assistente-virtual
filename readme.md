@@ -1,21 +1,36 @@
-<h1>Bem vindo ao pupila</h1>
+# Bem vindo ao Pupila  💻:accessibility:
 
-<p>O pupila é um software direcionado para facilitar  acesso ao computador às pessoas com deficência visual. O projeto é divivddo em 2 partes: o website ,utilizado para falar um pouco sobre o programa e fornecer acesso ao pupila e o programa propiamnte dito</p>
+ O Pupila é um software direcionado para pessoas com problemas visuais, seu objetivo é tornar o acesso ao computador mais prático. O software se baseia em uma Inteligência Artificial onde o usuário navegará pelo computador por comando de voz.
 
-<h2>Sobre o website<h2>
-  <h3>Tecnologias usadas no website</h3>
+## Funcionalidades 
+
+- Leitor de tela
+- Pesquisa na web
+- Reprodutor de música
+- Abertura de programas
+
+## Tecnologias usadas no software
   
-  <ul>
-  <li>HTML</li>
-  <li>CSS</li>
-  <li>JavaScript</li>
-  <li>Node.js</li>
-  <li>React</li>
-</ul>
-  
-  <h2>Tecnologias usadas no pupila</h2>
-  <ul>
-    <liL>
-      Python
-    </li>
-  </ul>
+- Python
+
+## Tecnologias usadas no site
+- HTML
+- CSS
+- Javascript
+- Node.js
+- React.js
+
+## Instruções para execução do software
+### Clone este repositório no VSCODE e baixe as seguintes dependências
+
+- pip install pillow
+- pip install pyaudio
+- pip install SpeechRecognition
+- pip install Pillow pyscreenshot
+- pip install pytesseract ::download https://github.com/UB-Mannheim/tesseract/wiki
+- pip install opencv-python
+- pip install --user gTTS
+- pip install --user playsound
+- pip install pyttsx3
+- pip install pygame
+- pip install pyautogui
